@@ -130,214 +130,21 @@
     <div class="error-message" id="error-message"></div>
     <script>
         // Arquivo JavaScript (script.js)
-        const fastMovesData = [
-            {
-                "moveId": "ACID",
-                "name": "Acid",
-                "abbreviation": "Ac",
-                "type": "poison",
-                "power": 6,
-                "energy": 0,
-                "energyGain": 5,
-                "cooldown": 1000,
-                "archetype": "Low Quality"
-            },
-            {
-                "moveId": "BUBBLE",
-                "name": "Bubble",
-                "abbreviation": "Bb",
-                "type": "water",
-                "power": 5,
-                "energy": 0,
-                "energyGain": 8,
-                "cooldown": 1200,
-                "archetype": "Low Quality"
-            },
-            {
-                "moveId": "MUD_SHOT",
-                "name": "Mud Shot",
-                "abbreviation": "MS",
-                "type": "ground",
-                "power": 3,
-                "energy": 0,
-                "energyGain": 9,
-                "cooldown": 600,
-                "archetype": "High Quality"
-            },
-             {
-                "moveId": "POISON_STING",
-                "name": "Poison Sting",
-                "abbreviation": "PS",
-                "type": "poison",
-                "power": 5,
-                "energy": 0,
-                "energyGain": 7,
-                "cooldown": 1000,
-                "archetype": "Average Quality"
-            },
-            {
-                "moveId": "SCRACH",
-                "name": "Scratch",
-                "abbreviation": "Scr",
-                "type": "normal",
-                "power": 4,
-                "energy": 0,
-                "energyGain": 2,
-                "cooldown": 500,
-                "archetype": "Low Quality"
-            },
-            {
-                "moveId": "THUNDER_SHOCK",
-                "name": "Thunder Shock",
-                "abbreviation": "TS",
-                "type": "electric",
-                "power": 5,
-                "energy": 0,
-                "energyGain": 8,
-                "cooldown": 800,
-                "archetype": "High Quality"
-            },
-            {
-                "moveId": "VINE_WHIP",
-                "name": "Vine Whip",
-                "abbreviation": "VW",
-                "type": "grass",
-                "power": 7,
-                "energy": 0,
-                "energyGain": 6,
-                "cooldown": 600,
-                "archetype": "Average Quality"
-            },
-            {
-                "moveId": "WATER_GUN",
-                "name": "Water Gun",
-                "abbreviation": "WG",
-                "type": "water",
-                "power": 3,
-                "energy": 0,
-                "energyGain": 5,
-                "cooldown": 500,
-                "archetype": "Low Quality"
-            }
-        ];
-        const chargedMovesData = [
-            {
-                "moveId": "ACID_SPRAY",
-                "name": "Acid Spray",
-                "type": "poison",
-                "power": 20,
-                "energy": 45,
-                "energyGain": 0,
-                "cooldown": 500,
-                "buffs": [0, -2],
-                "buffTarget": "opponent",
-                "buffApplyChance": "1",
-                "archetype": "Debuff"
-            },
-            {
-                "moveId": "AQUA_TAIL",
-                "name": "Aqua Tail",
-                "type": "water",
-                "power": 50,
-                "energy": 35,
-                "energyGain": 0,
-                "cooldown": 500,
-                "buffs": null,
-                "buffTarget": "none",
-                "buffApplyChance": "1",
-                "archetype": "Damage"
-            },
-            {
-                "moveId": "BODY_SLAM",
-                "name": "Body Slam",
-                "type": "normal",
-                "power": 60,
-                "energy": 35,
-                "energyGain": 0,
-                "cooldown": 500,
-                "buffs": null,
-                "buffTarget": "none",
-                "buffApplyChance": "1",
-                "archetype": "Damage"
-            },
-            {
-                "moveId": "BONE_CLUB",
-                "name": "Bone Club",
-                "type": "ground",
-                "power": 40,
-                "energy": 40,
-                "energyGain": 0,
-                "cooldown": 500,
-                "buffs": null,
-                "buffTarget": "none",
-                "buffApplyChance": "1",
-                "archetype": "Damage"
-            },
-            {
-                "moveId": "DARK_PULSE",
-                "name": "Dark Pulse",
-                "type": "dark",
-                "power": 80,
-                "energy": 50,
-                "energyGain": 0,
-                "cooldown": 500,
-                "buffs": null,
-                "buffTarget": "none",
-                "buffApplyChance": "1",
-                "archetype": "Damage"
-            },
-            {
-                "moveId": "DISCHARGE",
-                "name": "Discharge",
-                "type": "electric",
-                "power": 65,
-                "energy": 45,
-                "energyGain": 0,
-                "cooldown": 500,
-                "buffs": null,
-                "buffTarget": "none",
-                "buffApplyChance": "1",
-                "archetype": "Damage"
-            },
-            {
-                "moveId": "ENERGY_BALL",
-                "name": "Energy Ball",
-                "type": "psychic",
-                "power": 90,
-                "energy": 55,
-                "energyGain": 0,
-                "cooldown": 500,
-                "buffs": null,
-                "buffTarget": "none",
-                "buffApplyChance": "1",
-                "archetype": "Damage"
-            },
-            {
-                "moveId": "FLAMETHROWER",
-                "name": "Flamethrower",
-                "type": "fire",
-                "power": 70,
-                "energy": 50,
-                "energyGain": 0,
-                "cooldown": 500,
-                "buffs": null,
-                "buffTarget": "none",
-                "buffApplyChance": "1",
-                "archetype": "Damage"
-            }
-        ];
         const fastMovesTable = document.getElementById("fast-moves-table");
         const chargedMovesTable = document.getElementById("charged-moves-table");
         const errorMessageElement = document.getElementById("error-message");
+
         function populateTable(table, data, type) {
             const tableBody = table.querySelector("tbody");
             tableBody.innerHTML = "";
+
             if (!data || data.length === 0) {
                 errorMessageElement.textContent = `Não foi possível carregar os dados de ${type}.`;
                 return;
             } else {
-                errorMessageElement.textContent = "";
+                errorMessageElement.textContent = ""; // Limpa qualquer mensagem de erro anterior
             }
+
             data.forEach(move => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
@@ -355,14 +162,31 @@
                 tableBody.appendChild(row);
             });
         }
+
+        function loadMoveData() {
+            const movesUrl = "https://raw.githubusercontent.com/nowadraco/Pvp/refs/heads/main/moves.json";
+
+            fetch(movesUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Erro ao buscar dados: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const fastMovesData = data.fast;
+                    const chargedMovesData = data.charged;
+
+                    populateTable(fastMovesTable, fastMovesData, "fast");
+                    populateTable(chargedMovesTable, chargedMovesData, "charged");
+                })
+                .catch(error => {
+                    errorMessageElement.textContent = "Ocorreu um erro ao carregar os dados.";
+                    console.error(error);
+                });
+        }
         window.onload = () => {
-            try {
-                populateTable(fastMovesTable, fastMovesData, "fast");
-                populateTable(chargedMovesTable, chargedMovesData, "charged");
-            } catch (error) {
-                errorMessageElement.textContent = "Ocorreu um erro ao carregar os dados.";
-                console.error(error);
-            }
+            loadMoveData();
         };
     </script>
 </body>
