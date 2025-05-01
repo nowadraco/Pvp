@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimentos Pokémon GO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos CSS (styles.css) */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        .move-list-container {
+            display: flex;
+            justify-content: space-around;
+            width: 90%;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .move-list {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            min-width: 300px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        .move-list h3 {
+            margin-top: 0;
+            color: #3498db;
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 1em;
+        }
+        .move-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .move-table th, .move-table td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        .move-table th {
+            background-color: #f0f0f0;
+            font-weight: 500;
+        }
+        .move-table tbody tr:hover {
+            background-color: #f8f8f8;
+        }
+        @media (max-width: 768px) {
+            .move-list-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .move-list {
+                width: 90%;
+            }
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movimentos Pokémon GO</h1>
+    <div class="move-list-container">
+        <div class="move-list fast-moves">
+            <h3>Movimentos Rápidos</h3>
+            <table class="move-table" id="fast-moves-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Poder</th>
+                        <th>Energia Ganha</th>
+                        <th>Cooldown</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">Carregando dados...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="move-list charged-moves">
+            <h3>Movimentos Carregados</h3>
+            <table class="move-table" id="charged-moves-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Poder</th>
+                        <th>Energia</th>
+                        <th>Cooldown</th>
+                        <th>Buffs</th>
+                        <th>Alvo do Buff</th>
+                        <th>Chance de Aplicar Buff</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="8">Carregando dados...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="error-message" id="error-message"></div>
+    <script>
+        // Arquivo JavaScript (script.js)
+        const fastMovesData = [
+            {
+                "moveId": "ACID",
+                "name": "Acid",
+                "abbreviation": "Ac",
+                "type": "poison",
+                "power": 6,
+                "energy": 0,
+                "energyGain": 5,
+                "cooldown": 1000,
+                "archetype": "Low Quality"
+            },
+            {
+                "moveId": "BUBBLE",
+                "name": "Bubble",
+                "abbreviation": "Bb",
+                "type": "water",
+                "power": 5,
+                "energy": 0,
+                "energyGain": 8,
+                "cooldown": 1200,
+                "archetype": "Low Quality"
+            },
+            {
+                "moveId": "MUD_SHOT",
+                "name": "Mud Shot",
+                "abbreviation": "MS",
+                "type": "ground",
+                "power": 3,
+                "energy": 0,
+                "energyGain": 9,
+                "cooldown": 600,
+                "archetype": "High Quality"
+            },
+             {
+                "moveId": "POISON_STING",
+                "name": "Poison Sting",
+                "abbreviation": "PS",
+                "type": "poison",
+                "power": 5,
+                "energy": 0,
+                "energyGain": 7,
+                "cooldown": 1000,
+                "archetype": "Average Quality"
+            },
+            {
+                "moveId": "SCRACH",
+                "name": "Scratch",
+                "abbreviation": "Scr",
+                "type": "normal",
+                "power": 4,
+                "energy": 0,
+                "energyGain": 2,
+                "cooldown": 500,
+                "archetype": "Low Quality"
+            },
+            {
+                "moveId": "THUNDER_SHOCK",
+                "name": "Thunder Shock",
+                "abbreviation": "TS",
+                "type": "electric",
+                "power": 5,
+                "energy": 0,
+                "energyGain": 8,
+                "cooldown": 800,
+                "archetype": "High Quality"
+            },
+            {
+                "moveId": "VINE_WHIP",
+                "name": "Vine Whip",
+                "abbreviation": "VW",
+                "type": "grass",
+                "power": 7,
+                "energy": 0,
+                "energyGain": 6,
+                "cooldown": 600,
+                "archetype": "Average Quality"
+            },
+            {
+                "moveId": "WATER_GUN",
+                "name": "Water Gun",
+                "abbreviation": "WG",
+                "type": "water",
+                "power": 3,
+                "energy": 0,
+                "energyGain": 5,
+                "cooldown": 500,
+                "archetype": "Low Quality"
+            }
+        ];
+        const chargedMovesData = [
+            {
+                "moveId": "ACID_SPRAY",
+                "name": "Acid Spray",
+                "type": "poison",
+                "power": 20,
+                "energy": 45,
+                "energyGain": 0,
+                "cooldown": 500,
+                "buffs": [0, -2],
+                "buffTarget": "opponent",
+                "buffApplyChance": "1",
+                "archetype": "Debuff"
+            },
+            {
+                "moveId": "AQUA_TAIL",
+                "name": "Aqua Tail",
+                "type": "water",
+                "power": 50,
+                "energy": 35,
+                "energyGain": 0,
+                "cooldown": 500,
+                "buffs": null,
+                "buffTarget": "none",
+                "buffApplyChance": "1",
+                "archetype": "Damage"
+            },
+            {
+                "moveId": "BODY_SLAM",
+                "name": "Body Slam",
+                "type": "normal",
+                "power": 60,
+                "energy": 35,
+                "energyGain": 0,
+                "cooldown": 500,
+                "buffs": null,
+                "buffTarget": "none",
+                "buffApplyChance": "1",
+                "archetype": "Damage"
+            },
+            {
+                "moveId": "BONE_CLUB",
+                "name": "Bone Club",
+                "type": "ground",
+                "power": 40,
+                "energy": 40,
+                "energyGain": 0,
+                "cooldown": 500,
+                "buffs": null,
+                "buffTarget": "none",
+                "buffApplyChance": "1",
+                "archetype": "Damage"
+            },
+            {
+                "moveId": "DARK_PULSE",
+                "name": "Dark Pulse",
+                "type": "dark",
+                "power": 80,
+                "energy": 50,
+                "energyGain": 0,
+                "cooldown": 500,
+                "buffs": null,
+                "buffTarget": "none",
+                "buffApplyChance": "1",
+                "archetype": "Damage"
+            },
+            {
+                "moveId": "DISCHARGE",
+                "name": "Discharge",
+                "type": "electric",
+                "power": 65,
+                "energy": 45,
+                "energyGain": 0,
+                "cooldown": 500,
+                "buffs": null,
+                "buffTarget": "none",
+                "buffApplyChance": "1",
+                "archetype": "Damage"
+            },
+            {
+                "moveId": "ENERGY_BALL",
+                "name": "Energy Ball",
+                "type": "psychic",
+                "power": 90,
+                "energy": 55,
+                "energyGain": 0,
+                "cooldown": 500,
+                "buffs": null,
+                "buffTarget": "none",
+                "buffApplyChance": "1",
+                "archetype": "Damage"
+            },
+            {
+                "moveId": "FLAMETHROWER",
+                "name": "Flamethrower",
+                "type": "fire",
+                "power": 70,
+                "energy": 50,
+                "energyGain": 0,
+                "cooldown": 500,
+                "buffs": null,
+                "buffTarget": "none",
+                "buffApplyChance": "1",
+                "archetype": "Damage"
+            }
+        ];
+        const fastMovesTable = document.getElementById("fast-moves-table");
+        const chargedMovesTable = document.getElementById("charged-moves-table");
+        const errorMessageElement = document.getElementById("error-message");
+        function populateTable(table, data, type) {
+            const tableBody = table.querySelector("tbody");
+            tableBody.innerHTML = "";
+            if (!data || data.length === 0) {
+                errorMessageElement.textContent = `Não foi possível carregar os dados de ${type}.`;
+                return;
+            } else {
+                errorMessageElement.textContent = "";
+            }
+            data.forEach(move => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${move.name}</td>
+                    <td>${move.type}</td>
+                    <td>${move.power}</td>
+                    <td>${type === 'fast' ? move.energyGain : move.energy}</td>
+                    <td>${move.cooldown}</td>
+                    ${type === 'charged' ? `
+                        <td>${move.buffs ? move.buffs.join(', ') : '-'}</td>
+                        <td>${move.buffTarget || '-'}</td>
+                        <td>${move.buffApplyChance || '-'}</td>
+                    ` : ''}
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+        window.onload = () => {
+            try {
+                populateTable(fastMovesTable, fastMovesData, "fast");
+                populateTable(chargedMovesTable, chargedMovesData, "charged");
+            } catch (error) {
+                errorMessageElement.textContent = "Ocorreu um erro ao carregar os dados.";
+                console.error(error);
+            }
+        };
+    </script>
+</body>
+</html>
