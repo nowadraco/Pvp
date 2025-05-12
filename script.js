@@ -15,19 +15,31 @@ function populateTable(table, data, type) {
     }
 
     data.forEach(move => {
+        // Converte cooldown de milissegundos para turnos (1 turno = 500ms)
+        const cooldownTurns = (move.cooldown / 500).toFixed(1); // Arredonda para 1 casa decimal
+        let buffChanceDisplay = move.buffApplyChance;
+        if (type === 'charged') {
+            buffChanceDisplay = move.buffApplyChance ? `${(parseFloat(move.buffApplyChance) * 100).toFixed(1)}%` : '-'; // Arredonda para 1 casa decimal
+        }
+
         const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${move.name}</td>
-            <td>${move.type}</td>
-            <td>${move.power}</td>
-            <td>${type === 'fast' ? move.energyGain : move.energy}</td>
-            <td>${move.cooldown}</td>
-            ${type === 'charged' ? `
-                <td>${move.buffs ? move.buffs.join(', ') : '-'}</td>
-                <td>${move.buffTarget || '-'}</td>
-                <td>${move.buffApplyChance || '-'}</td>
-            ` : ''}
-        `;
+        if (type === 'fast') {
+            row.innerHTML = `
+                <td>${move.name}</td>
+                <td>${move.type}</td>
+                <td>${move.power}</td>
+                <td>${move.energyGain}</td>
+                <td>${cooldownTurns}</td>
+            `;
+        } else { // Para movimentos carregados, remove as colunas Buffs e Alvo do Buff
+            row.innerHTML = `
+                <td>${move.name}</td>
+                <td>${move.type}</td>
+                <td>${move.power}</td>
+                <td>${move.energy}</td>
+                <td>${buffChanceDisplay}</td>
+            `;
+        }
         tableBody.appendChild(row);
     });
 }
