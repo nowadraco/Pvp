@@ -16,7 +16,7 @@
     "energy": 45,
     "energyGain": 0,
     "cooldown": 500,
-     [0, -2],
+     "buffs": [0, -2],
     "buffTarget": "opponent",
     "buffApplyChance": "1",
     "archetype": "Debuff"
