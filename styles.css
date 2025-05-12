@@ -1,0 +1,74 @@
+/* Estilos CSS (styles.css) */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+h1 {
+    margin-top: 20px;
+}
+.move-list-container {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.move-list {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 45%;
+    min-width: 300px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+.move-list h3 {
+    margin-top: 0;
+    color: #3498db;
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+.move-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.move-table th, .move-table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+.move-table th {
+    background-color: #f0f0f0;
+    font-weight: 500;
+}
+.move-table tbody tr:hover {
+    background-color: #f8f8f8;
+}
+@media (max-width: 768px) {
+    .move-list-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .move-list {
+        width: 90%;
+    }
+}
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+}

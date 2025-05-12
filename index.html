@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimentos Pokémon GO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> </head>
+<body>
+    <h1>Movimentos Pokémon GO</h1>
+    <div class="move-list-container">
+        <div class="move-list fast-moves">
+            <h3>Movimentos Rápidos</h3>
+            <table class="move-table" id="fast-moves-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Poder</th>
+                        <th>Energia Ganha</th>
+                        <th>Cooldown</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">Carregando dados...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="move-list charged-moves">
+            <h3>Movimentos Carregados</h3>
+            <table class="move-table" id="charged-moves-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Poder</th>
+                        <th>Energia</th>
+                        <th>Cooldown</th>
+                        <th>Buffs</th>
+                        <th>Alvo do Buff</th>
+                        <th>Chance de Aplicar Buff</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="8">Carregando dados...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="error-message" id="error-message"></div>
+    <script src="script.js"></script> </body>
+</html>
