@@ -20,6 +20,10 @@ function populateTable(table, data, type) {
         let buffChanceDisplay = move.buffApplyChance;
         if (type === 'charged') {
             buffChanceDisplay = move.buffApplyChance ? `${(parseFloat(move.buffApplyChance) * 100).toFixed(1)}%` : '-'; // Arredonda para 1 casa decimal
+
+            if (move.buffTarget === 'opponent' && move.buffs && move.buffs.length > 1) {
+                buffChanceDisplay = `${buffChanceDisplay} de ${move.buffs[1]} no oponente`;
+            }
         }
 
         const row = document.createElement("tr");
