@@ -72,3 +72,42 @@ h1 {
     text-align: center;
     margin-top: 20px;
 }
+
+/* Media query para telas menores (responsividade) */
+@media (max-width: 768px) {
+    .move-list-container {
+        flex-direction: column; /* Empilha os elementos verticalmente em telas menores */
+        align-items: center;
+        width: 95%; /* Ocupa mais largura em telas menores */
+    }
+    .move-list {
+        width: 100%; /* Ocupa a largura total em telas menores */
+        margin-bottom: 20px; /* Adiciona margem inferior entre as listas empilhadas */
+    }
+    .move-table th, .move-table td {
+        padding: 6px; /* Reduz o padding em telas menores */
+        font-size: 0.8em; /* Reduz ainda mais o tamanho da fonte em telas muito pequenas */
+    }
+}
+
+/* Media query para telas muito pequenas (smartphones) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em; /* Reduz o tamanho do título principal */
+    }
+    .move-list h3 {
+        font-size: 1.3em; /* Reduz o tamanho do título da lista */
+    }
+    .move-table th, .move-table td {
+        padding: 4px; /* Reduz o padding para compactar a tabela */
+        font-size: 0.75em; /* Ajusta a fonte para caber em telas estreitas */
+    }
+    /* Esconde algumas colunas para telas muito pequenas para melhorar a legibilidade */
+    .fast-moves-table th:nth-child(4), .fast-moves-table td:nth-child(4), /* Energia Ganha */
+    .fast-moves-table th:nth-child(5), .fast-moves-table td:nth-child(5), /* Turnos */
+    .charged-moves-table th:nth-child(5), .charged-moves-table td:nth-child(5) /* Chance de Aplicar Buff */
+    {
+        display: none;
+    }
+}
+
